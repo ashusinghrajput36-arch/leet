@@ -1,0 +1,30 @@
+import java.util.Arrays;
+
+class Solution {
+    public int threeSumClosest(int[] nums, int target) {
+        Arrays.sort(nums); 
+        int closest = nums[0] + nums[1] + nums[2];
+
+        for (int i = 0; i < nums.length - 2; i++) {
+            int left = i + 1;
+            int right = nums.length - 1;
+
+            while (left < right) {
+                int sum = nums[i] + nums[left] + nums[right];
+                 //agar sum target ke bilkul pass hai to closest ko update karna hoga
+                if (Math.abs(sum - target) < Math.abs(closest - target)) {
+                    closest = sum;
+                }  // pointer move hoga comparison ke basis pe
+                if (sum < target) {
+                    left++; // bada sum chaiye taki left pointer move kar sAKE
+                } else if (sum > target) {
+                    right--; // CHOTA sum chaiye taki right pointer move kar sAKE
+                } else {
+                    // sum == target, perfect match
+                    return sum;
+                }
+            }
+        }
+        return closest;
+    }
+}
